@@ -1,5 +1,6 @@
 package trabalho;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,17 +16,6 @@ public class TestePessoa {
 
 
 	public static void main(String[] args) {
-
-		/* 
-		Dependente dep1 = new Dependente("Igor", "13456", LocalDate.of(2016, 4, 16), GrauParentesco.FILHO);
-		Dependente dep2 = new Dependente("Maria", "132458", LocalDate.of(2015, 9, 28), GrauParentesco.SOBRINHO);
-		Funcionario f1 = new Funcionario("thaisa","54987987", LocalDate.of(1989, 9, 8), 7000.);
-		
-		f1.adicionarDependentes(dep2);
-		f1.adicionarDependentes(dep1);
-		
-		System.out.println(f1);
-		*/
 		
 		File arquivo = new File("/exemplos/Dados.txt");
         try {
@@ -33,11 +23,20 @@ public class TestePessoa {
             List<Funcionario> f2 = new ArrayList<>();
 			Set<Dependente> d1 = new HashSet<>();
             System.out.println("-----Leitura Arquivo-----");
-            while (scan.hasNextLine()) {
+            if (scan.hasNextLine()) {
                 String linha = scan.nextLine();
                 if (!linha.isEmpty()) {
                     String vetor[] = linha.split(";");
                     f2.add(new Funcionario(vetor[0], vetor[1], LocalDate.parse(vetor[2]), Double.parseDouble(vetor[3])));
+                }
+            }
+            while (scan.hasNextLine()) {
+                String linha = scan.nextLine();
+                if (!linha.isEmpty()) {
+                    String vetor[] = linha.split(";");
+                    d1.add(new Dependente(vetor[0], vetor[1], LocalDate.parse(vetor[2]), GrauParentesco.valueOf(vetor[3])));
+                }else {
+                	break;
                 }
             }
             scan.close();
@@ -46,12 +45,15 @@ public class TestePessoa {
             for (Funcionario funcionario : f2) {
                 System.out.println(funcionario);
             }
+            for (Dependente dependente : d1) {
+				System.out.println(dependente);
+			}
 
             System.out.println("-----Gravação Arquivo-----");
             FileWriter arquivoGravar = new FileWriter("/exemplos/DadosAtual.txt");
             PrintWriter gravacaoArquivo = new PrintWriter(arquivoGravar);
             for (Funcionario fun : f2) {
-                String linha = fun.getCpf()+";"+ fun.getNome() + "\n";
+                String linha = fun.getNome() +";"+ fun.getCpf()+";"+ fun.getDataNascimento()+";"+ fun.getSalarioBruto()+"\n";
                 gravacaoArquivo.print(linha);
             }
             System.out.println("Arquivo gravado com sucesso!");
@@ -60,5 +62,6 @@ public class TestePessoa {
         } catch (IOException e) {
             System.out.println("Não funcionou!");
         }
+        
 	
 }}

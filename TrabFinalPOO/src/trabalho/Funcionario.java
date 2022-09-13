@@ -18,7 +18,7 @@ public class Funcionario extends Pessoa implements Calculo {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Funcionario [salarioBruto=" + salarioBruto + dependentes + "]";
+		return super.toString() + ", salarioBruto= " + salarioBruto;
 	}
 
 	public Double getSalarioBruto() {
