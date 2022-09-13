@@ -61,7 +61,7 @@ public class Funcionario extends Pessoa implements Calculo {
 	@Override
 	public Double calcularSalarioLiquido() {
 		return salarioBruto - descontoInss - descontoIR;
-
+		
 	}
-
+	//GOKU CARECA
 }
