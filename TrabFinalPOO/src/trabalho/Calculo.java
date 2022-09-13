@@ -6,4 +6,5 @@ public interface Calculo {
 	public void calcularINSS();
 
 	public Double calcularSalarioLiquido();
+
 }

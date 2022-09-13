@@ -2,7 +2,7 @@ package trabalho;
 
 import java.time.LocalDate;
 
-public abstract class Pessoa {
+public class Pessoa {
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
@@ -12,6 +12,11 @@ public abstract class Pessoa {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
+	}
+
+	@Override
+	public String toString() {
+		return "Nome= " + nome + ", cpf= " + cpf + ", dataNascimento= " + dataNascimento;
 	}
 
 	public String getNome() {
@@ -27,3 +32,4 @@ public abstract class Pessoa {
 	}
 
 }
+
