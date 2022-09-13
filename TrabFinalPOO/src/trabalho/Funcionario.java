@@ -8,20 +8,18 @@ public class Funcionario extends Pessoa implements Calculo {
 	private Double salarioBruto;
 	private Double descontoInss;
 	private Double descontoIR;
-	private Set<Dependente> dependentes =  new HashSet<>();
+	private Set<Dependente> dependentes = new HashSet<>();
 
 	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
 		super(nome, cpf, dataNascimento);
 		this.salarioBruto = salarioBruto;
 
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return super.toString() + "Funcionario [salarioBruto=" + salarioBruto + dependentes + "]";
 	}
-
 
 	public Double getSalarioBruto() {
 		return salarioBruto;
@@ -67,21 +65,22 @@ public class Funcionario extends Pessoa implements Calculo {
 		} else if (salarioBruto >= 2427.36 && salarioBruto <= 3641.03) {
 			descontoInss = (salarioBruto * 0.12) - 91.0;
 		} else if (salarioBruto >= 3641.04 && salarioBruto <= 7087.22) {
-			descontoInss = (salarioBruto * 0.14) - 163.82;} 
-		else {
-				descontoInss = 828.39;
-			}
-
+			descontoInss = (salarioBruto * 0.14) - 163.82;
+		} else {
+			descontoInss = 828.39;
 		}
 
-		@Override
-		public Double calcularSalarioLiquido() {
-			return salarioBruto - descontoInss - descontoIR;
+	}
 
-		}
-		public void adicionarDependentes(Dependente dependente) {
-			dependentes.add(dependente);
-		}
+	@Override
+	public Double calcularSalarioLiquido() {
+		return salarioBruto - descontoInss - descontoIR;
 
-		
-		}
+	}
+
+	public void adicionarDependentes(Dependente dependente) {
+		dependentes.add(dependente);
+	}
+
+	// teste
+}
