@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Funcionario extends Pessoa implements Calculo {
-	private Double salarioBruto;
-	private Double descontoInss;
-	private Double descontoIR;
+	private Double salarioBruto =0.;
+	private Double descontoInss=0.;
+	private Double descontoIR=0.;
 	private Set<Dependente> dependentes = new HashSet<>();
 
 	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
@@ -18,7 +18,7 @@ public class Funcionario extends Pessoa implements Calculo {
 
 	@Override
 	public String toString() {
-		return super.toString() + ", salarioBruto= " + salarioBruto;
+		return super.toString() + ", salarioBruto= " + salarioBruto + " dependentes=" + dependentes;
 	}
 
 	public Double getSalarioBruto() {
@@ -78,7 +78,7 @@ public class Funcionario extends Pessoa implements Calculo {
 
 	}
 
-	public void adicionarDependentes(Dependente dependente) {
+	public  void adicionarDependentes(Dependente dependente) {
 		dependentes.add(dependente);
 	}
 
