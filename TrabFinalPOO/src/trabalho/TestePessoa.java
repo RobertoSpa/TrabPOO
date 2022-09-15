@@ -13,9 +13,9 @@ public class TestePessoa {
 
 	public static void main(String[] args) {
 
-		File arquivo = new File("/exemplos/Dados.txt");
+		File arquivo = new File("/exemplos/dadosTrab.txt");
 		Set<Funcionario> funcionarios = new HashSet<>();
-		// Set<Dependente> dep = new HashSet<>();
+		Set<Dependente> dep = new HashSet<>();
 
 		try {
 			Scanner scan = new Scanner(arquivo);
@@ -66,17 +66,16 @@ public class TestePessoa {
 				func.calcularSalarioLiquido();
 				System.out.println(func);
 				System.out.println("----------------------");
-				System.out.println(func.getDescontoInss());
-				System.out.println(func.getDescontoIR());
 				System.out.println(func.getDependentes().size());
+
 			}
 
 			System.out.println("-----Gravação Arquivo-----");
-			FileWriter arquivoGravar = new FileWriter("/exemplos/DadosAtual.txt");
+			FileWriter arquivoGravar = new FileWriter("/exemplos/dadosGravados.txt");
 			PrintWriter gravacaoArquivo = new PrintWriter(arquivoGravar);
 			for (Funcionario func : funcionarios) {
-				String linha = func.getNome() + ";" + func.getCpf() + ";" + func.getDataNascimento() + ";"
-						+ func.getSalarioBruto() + "\n";
+				String linha = func.getNome() + ";" + func.getCpf() + ";" + String.format("%.2f", func.getDescontoInss()) + ";"
+						+ String.format("%.2f", func.getDescontoIR()) + ";" + String.format("%.2f", func.getSalarioLiquido())  + "\n";
 				gravacaoArquivo.print(linha);
 			}
 			System.out.println("Arquivo gravado com sucesso!");

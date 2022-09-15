@@ -18,5 +18,7 @@ public class Dependente extends Pessoa {
 	public GrauParentesco getParentesco() {
 		return parentesco;
 	}
+	
+	
 
 }

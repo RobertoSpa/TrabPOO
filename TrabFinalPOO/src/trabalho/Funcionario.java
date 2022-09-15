@@ -19,7 +19,7 @@ public class Funcionario extends Pessoa implements Calculo {
 
 	@Override
 	public String toString() {
-		return super.toString() + ", salarioBruto= " + salarioBruto + " dependentes=" + dependentes;
+		return super.getNome() + ";" + super.getCpf() + ";" + String.format("%.2f", descontoInss) + ";" + String.format("%.2f", descontoIR) + ";" + String.format("%.2f", salarioLiquido);
 	}
 
 	public Double getSalarioBruto() {
@@ -48,16 +48,17 @@ public class Funcionario extends Pessoa implements Calculo {
 
 	@Override
 	public void calcularIR() {
-		if (salarioBruto <= 1903.98) {
+		Double salarioBase = salarioBruto - (dependentes.size() * 189.59) - descontoInss;
+		if (salarioBase <= 1903.98) {
 			descontoIR = 0.;
-		} else if (salarioBruto >= 1903.98 && salarioBruto <= 2826.65) {
-			descontoIR = ((salarioBruto - (dependentes.size() * 189.59) - descontoInss) * 0.075) - 142.8;
-		} else if (salarioBruto >= 2826.66 && salarioBruto <= 3751.05) {
-			descontoIR = ((salarioBruto - (dependentes.size() * 189.59) - descontoInss) * 0.15) - 354.8;
-		} else if (salarioBruto >= 3751.06 && salarioBruto <= 4664.68) {
-			descontoIR = ((salarioBruto - (dependentes.size() * 189.59) - descontoInss) * 0.225) - 636.13;
+		} else if (salarioBase >= 1903.98 && salarioBase <= 2826.65) {
+			descontoIR = salarioBase * 0.075 - 142.8;
+		} else if (salarioBase >= 2826.66 && salarioBase <= 3751.05) {
+			descontoIR = salarioBase * 0.15 - 354.8;
+		} else if (salarioBase >= 3751.06 && salarioBase <= 4664.68) {
+			descontoIR = salarioBase * 0.225 - 636.13;
 		} else {
-			descontoIR = ((salarioBruto - (dependentes.size() * 189.59) - descontoInss) * 0.275) - 869.36;
+			descontoIR = salarioBase * 0.275 - 869.36;
 		}
 	}
 
