@@ -1,6 +1,8 @@
-package trabalho;
+package model;
 
 import java.time.LocalDate;
+
+import enums.GrauParentesco;
 
 public class Dependente extends Pessoa {
 	private GrauParentesco parentesco;

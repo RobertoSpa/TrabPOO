@@ -1,4 +1,4 @@
-package trabalho;
+package interfaces;
 
 public interface Calculo {
 	public void calcularIR();

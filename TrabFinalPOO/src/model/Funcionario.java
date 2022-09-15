@@ -1,8 +1,10 @@
-package trabalho;
+package model;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+import interfaces.Calculo;
 
 public class Funcionario extends Pessoa implements Calculo {
 	private Double salarioBruto = 0.;
