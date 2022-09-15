@@ -5,9 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Funcionario extends Pessoa implements Calculo {
-	private Double salarioBruto =0.;
-	private Double descontoInss=0.;
-	private Double descontoIR=0.;
+	private Double salarioBruto = 0.;
+	private Double descontoInss = 0.;
+	private Double descontoIR = 0.;
+	private Double salarioLiquido = 0.;
 	private Set<Dependente> dependentes = new HashSet<>();
 
 	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
@@ -33,6 +34,10 @@ public class Funcionario extends Pessoa implements Calculo {
 		return descontoIR;
 	}
 
+	public Double getSalarioLiquido() {
+		return salarioLiquido;
+	}
+
 	public Set<Dependente> getDependentes() {
 		return dependentes;
 	}
@@ -45,14 +50,14 @@ public class Funcionario extends Pessoa implements Calculo {
 	public void calcularIR() {
 		if (salarioBruto <= 1903.98) {
 			descontoIR = 0.;
-		} else if (salarioBruto <= 1903.98 && salarioBruto >= 2826.65) {
-			descontoIR = (salarioBruto - dependentes.size() * 189.59 - descontoInss) * 0.075 - 142.8;
-		} else if (salarioBruto <= 2826.66 && salarioBruto >= 3751.05) {
-			descontoIR = (salarioBruto - dependentes.size() * 189.59 - descontoInss) * 0.15 - 354.8;
-		} else if (salarioBruto <= 3751.06 && salarioBruto >= 4664.68) {
-			descontoIR = (salarioBruto - dependentes.size() * 189.59 - descontoInss) * 0.225 - 636.13;
+		} else if (salarioBruto >= 1903.98 && salarioBruto <= 2826.65) {
+			descontoIR = ((salarioBruto - (dependentes.size() * 189.59) - descontoInss) * 0.075) - 142.8;
+		} else if (salarioBruto >= 2826.66 && salarioBruto <= 3751.05) {
+			descontoIR = ((salarioBruto - (dependentes.size() * 189.59) - descontoInss) * 0.15) - 354.8;
+		} else if (salarioBruto >= 3751.06 && salarioBruto <= 4664.68) {
+			descontoIR = ((salarioBruto - (dependentes.size() * 189.59) - descontoInss) * 0.225) - 636.13;
 		} else {
-			descontoIR = (salarioBruto - dependentes.size() * 189.59 - descontoInss) * 0.275 - 869.36;
+			descontoIR = ((salarioBruto - (dependentes.size() * 189.59) - descontoInss) * 0.275) - 869.36;
 		}
 	}
 
@@ -73,14 +78,13 @@ public class Funcionario extends Pessoa implements Calculo {
 	}
 
 	@Override
-	public Double calcularSalarioLiquido() {
-		return salarioBruto - descontoInss - descontoIR;
+	public void calcularSalarioLiquido() {
+		salarioLiquido = salarioBruto - descontoInss - descontoIR;
 
 	}
 
-	public  void adicionarDependentes(Dependente dependente) {
+	public void adicionarDependentes(Dependente dependente) {
 		dependentes.add(dependente);
 	}
 
-	// teste
 }
