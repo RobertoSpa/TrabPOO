@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ public class TestePessoa {
 
 		File arquivo = new File("/exemplos/dadosTrab.txt");
 		Set<Funcionario> funcionarios = new HashSet<>();
+		DecimalFormat df = new DecimalFormat("0.00");
 
 		try {
 			try (Scanner scan = new Scanner(arquivo)) {
@@ -43,13 +45,9 @@ public class TestePessoa {
 							}
 
 							String parentescoDep = vetor[3];
-							try {
-								Dependente d = new Dependente(nomeDep, cpfDep, LocalDate.parse(dataNascDep),
-										GrauParentesco.valueOf(parentescoDep));
-								funcionario.getDependentes().add(d);
-							} catch (Exception e) {
-								System.out.println("Erro!");
-							}
+							Dependente d = new Dependente(nomeDep, cpfDep, LocalDate.parse(dataNascDep),
+									GrauParentesco.valueOf(parentescoDep));
+							funcionario.getDependentes().add(d);
 
 							continue;
 						}
@@ -78,9 +76,12 @@ public class TestePessoa {
 				func.calcularINSS();
 				func.calcularIR();
 				func.calcularSalarioLiquido();
-				System.out.println(func);
 				System.out.println("----------------------");
-				System.out.println(func.getDependentes().size());
+				System.out.println(func);
+				System.out.println("Dependentes:" + func.getDependentes().size());
+				System.out.println("INSS: " + df.format(func.getDescontoInss()));
+				System.out.println("IR: " + df.format(func.getDescontoIR()));
+				System.out.println("SALÁRIO LÍQUIDO: " + df.format(func.getSalarioLiquido()));
 
 			}
 
@@ -89,9 +90,9 @@ public class TestePessoa {
 			PrintWriter gravacaoArquivo = new PrintWriter(arquivoGravar);
 			for (Funcionario func : funcionarios) {
 				String linha = func.getNome() + ";" + func.getCpf() + ";"
-						+ String.format("%.2f", func.getDescontoInss()) + ";"
-						+ String.format("%.2f", func.getDescontoIR()) + ";"
-						+ String.format("%.2f", func.getSalarioLiquido()) + "\n";
+						+ df.format(func.getDescontoInss()) + ";"
+						+ df.format(func.getDescontoIR()) + ";"
+						+ df.format(func.getSalarioLiquido()) + "\n";
 				gravacaoArquivo.print(linha);
 			}
 			System.out.println("Arquivo gravado com sucesso!");
