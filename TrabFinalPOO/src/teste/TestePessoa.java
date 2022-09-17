@@ -10,7 +10,6 @@ import java.time.Period;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
 import enums.GrauParentesco;
 import exceptions.DependenteException;
 import model.Dependente;
@@ -20,7 +19,7 @@ public class TestePessoa {
 
 	public static void main(String[] args) {
 
-		File arquivo = new File("/exemplos/dadosTrab.txt");
+		File arquivo = new File("/exemplos/dadosTrab2.txt");
 		Set<Funcionario> funcionarios = new HashSet<>();
 		DecimalFormat df = new DecimalFormat("0.00");
 
@@ -36,7 +35,6 @@ public class TestePessoa {
 						if (funcionario != null) {
 							String nomeDep = vetor[0];
 							String cpfDep = vetor[1];
-
 							String dataNascDep = vetor[2];
 							LocalDate testeIdade = LocalDate.parse(dataNascDep);
 							Period diferencaIdade = Period.between(testeIdade, LocalDate.now());
@@ -78,21 +76,15 @@ public class TestePessoa {
 				func.calcularSalarioLiquido();
 				System.out.println("----------------------");
 				System.out.println(func);
-				System.out.println("Dependentes:" + func.getDependentes().size());
-				System.out.println("INSS: " + df.format(func.getDescontoInss()));
-				System.out.println("IR: " + df.format(func.getDescontoIR()));
-				System.out.println("SALÁRIO LÍQUIDO: " + df.format(func.getSalarioLiquido()));
 
 			}
 
 			System.out.println("-----Gravação Arquivo-----");
-			FileWriter arquivoGravar = new FileWriter("/exemplos/dadosGravados.txt");
+			FileWriter arquivoGravar = new FileWriter("/exemplos/dadosGravados11.txt");
 			PrintWriter gravacaoArquivo = new PrintWriter(arquivoGravar);
 			for (Funcionario func : funcionarios) {
-				String linha = func.getNome() + ";" + func.getCpf() + ";"
-						+ df.format(func.getDescontoInss()) + ";"
-						+ df.format(func.getDescontoIR()) + ";"
-						+ df.format(func.getSalarioLiquido()) + "\n";
+				String linha = func.getNome() + ";" + func.getCpf() + ";" + df.format(func.getDescontoInss()) + ";"
+						+ df.format(func.getDescontoIR()) + ";" + df.format(func.getSalarioLiquido()) + "\n";
 				gravacaoArquivo.print(linha);
 			}
 			System.out.println("Arquivo gravado com sucesso!");
