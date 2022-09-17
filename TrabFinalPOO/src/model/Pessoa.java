@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Pessoa {
+public abstract class Pessoa {
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;

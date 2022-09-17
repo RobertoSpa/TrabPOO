@@ -86,8 +86,4 @@ public class Funcionario extends Pessoa implements Calculo {
 
 	}
 
-	public void adicionarDependentes(Dependente dependente) {
-		dependentes.add(dependente);
-	}
-
 }
